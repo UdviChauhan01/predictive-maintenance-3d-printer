@@ -35,23 +35,23 @@ if uploaded_file is not None:
         if model:
             if st.button("🚀 Predict Maintenance"):
                 try:
-                    # Clean up data before prediction
+                    # Create a clean copy of uploaded data
                     df_clean = df.copy()
 
-                    # Drop known unwanted columns
-                    if 'Unnamed: 0' in df_clean.columns:
-                        df_clean.drop('Unnamed: 0', axis=1, inplace=True)
-                    if 'Status' in df_clean.columns:
-                        df_clean.drop('Status', axis=1, inplace=True)
-
-                    # Keep only the features used during training
+                    # Use only the features used during model training
                     if hasattr(model, 'feature_names_in_'):
-                        df_clean = df_clean[model.feature_names_in_]
+                        df_clean = df_clean[[col for col in model.feature_names_in_ if col in df_clean.columns]]
+                    else:
+                        st.error("Model does not contain 'feature_names_in_'. Cannot match columns.")
+                        st.stop()
 
+                    # Prediction
                     predictions = model.predict(df_clean)
-                    st.success("Prediction completed!")
-                    st.subheader("Prediction Results")
+
+                    st.success("✅ Prediction completed!")
+                    st.subheader("📈 Prediction Results")
                     st.dataframe(pd.DataFrame({'Prediction': predictions}))
+
                 except Exception as e:
                     st.error(f"Prediction error: {e}")
         else:
