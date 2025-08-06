@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Streamlit app settings
 st.set_page_config(page_title="3D Printer Predictive Maintenance", layout="wide")
@@ -35,22 +37,31 @@ if uploaded_file is not None:
         if model:
             if st.button("🚀 Predict Maintenance"):
                 try:
-                    # Create a clean copy of uploaded data
-                    df_clean = df.copy()
+                    # ✅ Drop Timestamp column if it exists
+                    if 'Timestamp' in df.columns:
+                        df = df.drop('Timestamp', axis=1)
 
-                    # Use only the features used during model training
-                    if hasattr(model, 'feature_names_in_'):
-                        df_clean = df_clean[[col for col in model.feature_names_in_ if col in df_clean.columns]]
-                    else:
-                        st.error("Model does not contain 'feature_names_in_'. Cannot match columns.")
-                        st.stop()
-
-                    # Prediction
-                    predictions = model.predict(df_clean)
-
+                    # ✅ Make predictions
+                    predictions = model.predict(df)
                     st.success("✅ Prediction completed!")
+
+                    # ✅ Show Prediction Table
                     st.subheader("📈 Prediction Results")
-                    st.dataframe(pd.DataFrame({'Prediction': predictions}))
+                    results = df.copy()
+                    results['Predicted_Status'] = predictions
+                    st.dataframe(results)
+
+                    # ✅ Fault Type Distribution Chart
+                    st.subheader("📊 Fault Type Distribution")
+                    fault_counts = results['Predicted_Status'].value_counts()
+
+                    fig, ax = plt.subplots()
+                    sns.barplot(x=fault_counts.index, y=fault_counts.values, ax=ax)
+                    ax.set_xlabel("Fault Type")
+                    ax.set_ylabel("Number of Occurrences")
+                    ax.set_title("Predicted Fault Distribution")
+                    plt.xticks(rotation=45)
+                    st.pyplot(fig)
 
                 except Exception as e:
                     st.error(f"Prediction error: {e}")
