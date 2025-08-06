@@ -55,12 +55,13 @@ if uploaded_file is not None:
                     st.subheader("📊 Fault Type Distribution")
                     fault_counts = results['Predicted_Status'].value_counts()
 
-                    fig, ax = plt.subplots()
+                    fig, ax = plt.subplots(figsize=(8, 4))  # ✅ Smaller size (width=8, height=4 inches)
                     sns.barplot(x=fault_counts.index, y=fault_counts.values, ax=ax)
                     ax.set_xlabel("Fault Type")
                     ax.set_ylabel("Number of Occurrences")
                     ax.set_title("Predicted Fault Distribution")
-                    plt.xticks(rotation=45)
+                    plt.xticks(rotation=30)
+                    plt.tight_layout()  # ✅ Adjusts spacing
                     st.pyplot(fig)
 
                 except Exception as e:
@@ -71,3 +72,4 @@ if uploaded_file is not None:
         st.error(f"Could not read CSV file: {e}")
 else:
     st.info("Upload a CSV file to start predictions.")
+
