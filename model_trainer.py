@@ -20,4 +20,5 @@ model.fit(X_train, y_train)
 
 # Save model as pickle
 joblib.dump(model, "C:/Users/vedan/Desktop/pd_maintenance_3Dprinter/printer_predictive_model.pkl")
+
 print("Model saved as printer_predictive_model.pkl") 
