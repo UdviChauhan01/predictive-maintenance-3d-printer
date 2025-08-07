@@ -13,13 +13,11 @@ This project detects potential failures in 3D printers using synthetic sensor da
 - `model_trainer.py` — Trains multiple ML models and ensemble  
 - `requirements.txt` — All Python dependencies  
 
-## 🚀 Models Used
+## 🚀 ML Models Used
 
-- RandomForest  
-- GradientBoosting  
+- RandomForest    
 - XGBoost  
 - LightGBM  
-- Ensemble Voting  
 
 ## 🔧 Tech Stack
 
