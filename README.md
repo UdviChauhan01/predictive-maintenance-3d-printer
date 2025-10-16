@@ -3,13 +3,13 @@
 This project predicts potential failures in 3D printers using synthetic sensor data and machine learning models.
 It was developed under the Intel® AI for Manufacturing Certification Program in collaboration with Gujarat Technological University.
 
-##🌐 Live App  
+## 🌐 Live App  
 
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://predictive-maintenance-3d-printer-acplqrybdln8s46oqxrzze.streamlit.app/)
 
 Click the badge above to try the interactive Streamlit app, where you can upload sensor data and view predictive insights.
 
-## Project Objective
+## 🎯 Project Objective
 
 To develop a predictive maintenance system that can forecast machine faults before they occur — helping reduce downtime, save costs, and improve productivity in additive manufacturing.
 
@@ -62,4 +62,5 @@ To develop a predictive maintenance system that can forecast machine faults befo
 - Implement automatic model retraining with incoming operational data.
 
 ## 🔗 Connect
-[![LinkedIn](https://www.linkedin.com/in/udvi-chauhan/)
+
+💼 [![LinkedIn](https://www.linkedin.com/in/udvi-chauhan/)
